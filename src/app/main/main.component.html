@@ -400,12 +400,26 @@
           <div class="col-12 col-md-4 dtr-pr-0 dtr-md-pr-15">
 
             <!-- Paket 1 starts -->
-            <div class="dtr-pricing bg-light-green">
+            <div class="dtr-pricing bg-light-green ">
               <div class="dtr-pricing-img"><img src="assets/images/ptable-icon1.png" alt="image"></div>
               <h3>Starter Paket</h3>
-              <p class="dtr-price color-green"><sup>₺</sup>7490</p>
+
+              <!-- Toggle switch for yearly/monthly -->
+              <div class="d-flex justify-content-center mb-3">
+                <div class="btn-group btn-group-toggle">
+                  <label class="btn btn-sm btn-outline-green" [class.active]="package1Type === 1">
+                    <input type="radio" name="package1" [(ngModel)]="package1Type" [value]="1"> Yıllık
+                  </label>
+                  <label class=" btn btn-sm btn-outline-green" [class.active]="package1Type === 2">
+                    <input type="radio" name="package1" [(ngModel)]="package1Type" [value]="2"> Aylık
+                  </label>
+                </div>
+              </div>
+
+              <p class=" dtr-price color-green"><sup>₺</sup>{{ package1Type === 1 ? '7490' : '1249' }}</p>
               <p class="dtr-m-0">den başlayan fiyatlarla*</p>
-              <a href="#" class="dtr-btn btn-green dtr-my-30">Satın Al</a>
+              <a [routerLink]="['/register']" [queryParams]="{packageType: package1Type}"
+                class="dtr-btn btn-green dtr-my-30">Satın Al</a>
               <p class="text-size-md font-weight-600 color-green">Temel Özellikler</p>
               <ul class="dtr-list-block">
                 <li>Dijital Menü</li>
@@ -428,9 +442,23 @@
               </div>
               <div class="dtr-pricing-img"><img src="assets/images/ptable-icon2.png" alt="image"></div>
               <h3 class="color-white">Professional Paket</h3>
-              <p class="dtr-price color-green"><sup>₺</sup>9490</p>
+
+              <!-- Toggle switch for yearly/monthly -->
+              <div class="d-flex justify-content-center mb-3">
+                <div class="btn-group btn-group-toggle">
+                  <label class="btn btn-sm btn-outline-white" [class.active]="package2Type === 3">
+                    <input type="radio" name="package2" [(ngModel)]="package2Type" [value]="3"> Yıllık
+                  </label>
+                  <label class=" btn btn-sm btn-outline-white" [class.active]="package2Type === 4">
+                    <input type="radio" name="package2" [(ngModel)]="package2Type" [value]="4"> Aylık
+                  </label>
+                </div>
+              </div>
+
+              <p class="dtr-price color-green"><sup>₺</sup>{{ package2Type === 3 ? '9490' : '1590' }}</p>
               <p class="dtr-m-0 color-white">den başlayan fiyatlarla*</p>
-              <a href="#" class="dtr-btn btn-white dtr-my-30">Satın Al</a>
+              <a [routerLink]="['/register']" [queryParams]="{packageType: package2Type}"
+                class="dtr-btn btn-white dtr-my-30">Satın Al</a>
               <p class="text-size-md font-weight-600 color-green">Ekstra Özellikler</p>
               <ul class="dtr-list-block color-white">
                 <li>Dijital Menü</li>
@@ -451,9 +479,20 @@
             <div class="dtr-pricing bg-light-green">
               <div class="dtr-pricing-img"><img src="assets/images/ptable-icon3.png" alt="image"></div>
               <h3>Premium Paket</h3>
+
+              <!-- Only yearly option -->
+              <div class="d-flex justify-content-center mb-3">
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                  <label class="btn btn-sm btn-outline-green active">
+                    <input type="radio" name="package3" checked disabled> Yıllık
+                  </label>
+                </div>
+              </div>
+
               <p class="dtr-price color-green"><sup>₺</sup>17490</p>
               <p class="dtr-m-0">den başlayan fiyatlarla*</p>
-              <a href="#" class="dtr-btn btn-green dtr-my-30">Satın Al</a>
+              <a [routerLink]="['/register']" [queryParams]="{packageType: 5}" class="dtr-btn btn-green dtr-my-30">Satın
+                Al</a>
               <p class="text-size-md font-weight-600 color-green">Tüm Özellikler</p>
               <ul class="dtr-list-block">
                 <li>Dijital Menü</li>
@@ -462,7 +501,6 @@
                 <li>Self-Order Ekranı Yazılımı</li>
                 <li>Admin Panelli Tanıtım Web Sitesi</li>
                 <li>Alan Adı Danışmanlığı</li>
-
               </ul>
             </div>
             <!-- Paket 3 ends -->

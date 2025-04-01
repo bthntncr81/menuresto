@@ -1,4 +1,5 @@
 import { NgModule } from "@angular/core";
+import { FormsModule } from '@angular/forms';
 import {
   BrowserModule,
   provideClientHydration,
@@ -13,8 +14,8 @@ import { MainComponent } from "./main/main.component";
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent, MainComponent],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [provideClientHydration()],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
