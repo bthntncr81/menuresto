@@ -1,0 +1,51 @@
+.btn-outline-green.active {
+    background-color: #28a745;
+    color: white;
+    border-color: #28a745;
+}
+
+.btn-outline-white {
+    color: white;
+}
+
+.btn-outline-white.active {
+    background-color: #28a745;
+    color: white;
+    border-color: #28a745;
+}
+
+.dtr-form {
+    display: flex;
+    justify-content: center;
+    /* Yatayda ortalama */
+    align-items: center;
+    /* Dikeyde ortalama */
+    height: 100%;
+    /* Yüksekliği yüzde olarak ayarlayarak, alt elemanları ortalayabilirsiniz */
+}
+
+.dtr-form fieldset {
+    width: 100%;
+    /* Form alanını genişletir */
+    max-width: 500px;
+    /* İstenilen maksimum genişlik */
+    margin: 0 auto;
+    /* Ortalamayı sağlar */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.dtr-input {
+    margin-bottom: 45px;
+}
+
+.dtr-btn {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.dtr-btn.btn-dark-blue,
+.dtr-btn.btn-light-blue {
+    width: 100%;
+    margin: 5px 0;
+}
