@@ -10,12 +10,14 @@ import { AppComponent } from "./app.component";
 import { FooterComponent } from "./footer/footer.component";
 import { HeaderComponent } from "./header/header.component";
 
+import { HttpClientModule } from "@angular/common/http";
 import { MainComponent } from "./main/main.component";
 import { RegisterComponent } from './pages/register/register.component';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent, MainComponent, RegisterComponent],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule,
+  ],
   providers: [provideClientHydration()],
   bootstrap: [AppComponent],
 })
