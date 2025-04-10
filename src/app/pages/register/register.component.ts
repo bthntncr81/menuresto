@@ -1,3 +1,4 @@
+// register.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RegisterService } from './register.service';
@@ -9,6 +10,8 @@ import { RegisterService } from './register.service';
 })
 export class RegisterComponent implements OnInit {
   packageType: string = '';
+  currentStep: number = 1; // 1: Kayıt, 2: Doğrulama, 3: Ödeme
+  verificationCode: string = '';
   formData = {
     name: '',
     surname: '',
@@ -18,62 +21,47 @@ export class RegisterComponent implements OnInit {
 
   message: string = '';
   errorMessage: string = '';
-  language = 'tr'; // veya 'en'
+  language = 'tr';
+
   constructor(private route: ActivatedRoute, private router: Router, private registerService: RegisterService) { }
 
   ngOnInit() {
-    window.scrollTo(0, 0); // 👈 Sayfa en üste çıksın
-    // URL'den paket bilgisini al
+    window.scrollTo(0, 0);
     this.route.queryParams.subscribe(params => {
       this.packageType = params['packageType'] || 'standart';
     });
   }
+
   isValidEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   }
 
   onSubmit() {
-    // Form doluluk kontrolü
-    if (
-      !this.formData.name ||
-      !this.formData.surname ||
-      !this.formData.email ||
-      !this.formData.phone
-    ) {
-      this.errorMessage =
-        this.language === 'en'
-          ? 'Please fill out all required fields.'
-          : 'Lütfen tüm alanları doldurunuz.';
+    if (!this.formData.name || !this.formData.surname || !this.formData.email || !this.formData.phone) {
+      this.errorMessage = this.language === 'en' ? 'Please fill out all required fields.' : 'Lütfen tüm alanları doldurunuz.';
       return;
     }
 
-    // E-mail doğrulama
     if (!this.isValidEmail(this.formData.email)) {
-      this.errorMessage =
-        this.language === 'en'
-          ? 'Please enter a valid email address.'
-          : 'Lütfen geçerli bir e-posta adresi giriniz.';
+      this.errorMessage = this.language === 'en' ? 'Please enter a valid email address.' : 'Lütfen geçerli bir e-posta adresi giriniz.';
       return;
     }
 
-    // Arka plan işaretleme
     var body = document.getElementsByTagName('body')[0];
     body.classList.remove('page-loaded');
 
-    // Register API çağrısı
     this.registerService.register(this.formData).subscribe({
       next: (res) => {
-        this.message =
-          this.language === 'en'
-            ? 'Registration successful. Please check your email to verify.'
-            : 'Kayıt başarılı. Lütfen e-postanızı kontrol ederek doğrulayınız.';
+        this.message = this.language === 'en'
+          ? 'Registration successful. Please check your email for verification code.'
+          : 'Kayıt başarılı. Lütfen e-postanızı kontrol ederek doğrulama kodunu giriniz.';
+        this.currentStep = 2; // Doğrulama adımına geç
       },
       error: (err) => {
-        this.errorMessage =
-          this.language === 'en'
-            ? 'Registration failed: ' + err.error.message
-            : 'Kayıt başarısız: ' + err.error.message;
+        this.errorMessage = this.language === 'en'
+          ? 'Registration failed: ' + err.error.message
+          : 'Kayıt başarısız: ' + err.error.message;
       },
       complete: () => {
         setTimeout(() => {
@@ -83,9 +71,44 @@ export class RegisterComponent implements OnInit {
       },
     });
   }
-  goBackToPlans() {
-    this.router.navigateByUrl('/').then(() => {
-      location.reload(); // 👈 Sayfayı tamamen yenile
+
+  verifyCode() {
+    if (!this.verificationCode) {
+      this.errorMessage = this.language === 'en'
+        ? 'Please enter verification code.'
+        : 'Lütfen doğrulama kodunu giriniz.';
+      return;
+    }
+    const payload: VerifieEmailDTO = {
+      Email: this.formData.email,
+      VerificationCode: this.verificationCode
+    };
+    this.registerService.verifyEmail(payload).subscribe({
+      next: (res) => {
+        this.currentStep = 3; // Ödeme adımına geç
+        this.errorMessage = '';
+      },
+      error: (err) => {
+        this.errorMessage = this.language === 'en'
+          ? 'Invalid verification code.'
+          : 'Geçersiz doğrulama kodu.';
+      }
     });
   }
+
+  proceedToPayment() {
+    // Ödeme sayfasına yönlendirme veya ödeme modal'ını açma
+    const paymentUrl = `https://pay.posfixmenu.com?email=${encodeURIComponent(this.formData.email)}&packageId=${this.packageType}`;
+    window.location.href = paymentUrl;
+  }
+
+  goBackToPlans() {
+    this.router.navigateByUrl('/').then(() => {
+      location.reload();
+    });
+  }
+}
+interface VerifieEmailDTO {
+  Email: string;
+  VerificationCode: string;
 }

@@ -1,6 +1,6 @@
+<!-- register.component.html -->
 <section class="dtr-section dtr-py-100">
     <div class="container">
-
         <!-- Başlık -->
         <div class="row dtr-mb-50">
             <div class="col-12 text-center">
@@ -10,8 +10,19 @@
             </div>
         </div>
 
+        <!-- Aşamalar -->
+        <div class="row dtr-mb-30">
+            <div class="col-12">
+                <ul class="dtr-progressbar">
+                    <li [class.active]="currentStep >= 1">Kayıt Bilgileri</li>
+                    <li [class.active]="currentStep >= 2">Email Doğrulama</li>
+                    <li [class.active]="currentStep >= 3">Ödeme</li>
+                </ul>
+            </div>
+        </div>
+
         <!-- Form Alanı -->
-        <div class="row ">
+        <div class="row">
             <div class="col-12 col-md-5 dtr-md-mb-30 d-flex align-items-center">
                 <!-- Paket 1 starts -->
                 <div *ngIf="+packageType === 1 || +packageType === 2" class="dtr-pricing bg-light-green ">
@@ -98,9 +109,11 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-12 col-md-7 ">
+
+            <div class="col-12 col-md-7">
                 <div class="dtr-form dtr-form-has-icon">
-                    <form (ngSubmit)="onSubmit()">
+                    <!-- Adım 1: Kayıt Formu -->
+                    <form *ngIf="currentStep === 1" (ngSubmit)="onSubmit()">
                         <fieldset class="dtr-py-100">
                             <p class="dtr-input">
                                 <i class="icon-user color-dark-blue"></i>
@@ -122,9 +135,9 @@
                                 <input type="tel" [(ngModel)]="formData.phone" name="phone" placeholder="Telefon"
                                     required>
                             </p>
+                            <div *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
                             <p class="dtr-m-0 text-center">
                                 * İşlemlerinize devam edebilmek için. Mail adresinize doğrulama mesajı gönderilecektir.
-                                Mail adresiniz doğrulandıktan sonra satın alma işlemine devam edebilirsiniz.
                             </p>
                             <p class="dtr-m-0 text-center">
                                 <button class="dtr-btn btn-dark-blue" type="submit">Kayıt Ol</button>
@@ -133,9 +146,33 @@
                             </p>
                         </fieldset>
                     </form>
+
+                    <!-- Adım 2: Doğrulama Kodu -->
+                    <div *ngIf="currentStep === 2" class="dtr-py-100 text-center">
+                        <h3 class="dtr-mb-20">Email Doğrulama</h3>
+                        <p>{{formData.email}} adresine gönderilen doğrulama kodunu giriniz.</p>
+
+                        <div class="dtr-input dtr-mb-20">
+                            <i class="icon-lock color-dark-blue"></i>
+                            <input type="text" [(ngModel)]="verificationCode" placeholder="Doğrulama Kodu">
+                        </div>
+
+                        <div *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
+                        <div *ngIf="message" class="alert alert-success">{{message}}</div>
+
+                        <button class="dtr-btn btn-dark-blue dtr-mr-10" (click)="verifyCode()">Doğrula</button>
+                        <button class="dtr-btn btn-light-blue" (click)="currentStep = 1">Geri Dön</button>
+                    </div>
+
+                    <!-- Adım 3: Ödeme Bilgileri -->
+                    <div *ngIf="currentStep === 3" class="dtr-py-100 text-center">
+                        <h3 class="dtr-mb-20">Ödeme İşlemleri</h3>
+                        <p>Email doğrulama başarılı! Ödeme işlemine devam edebilirsiniz.</p>
+
+                        <button class="dtr-btn btn-dark-blue" (click)="proceedToPayment()">Ödemeye Devam Et</button>
+                    </div>
                 </div>
             </div>
         </div>
-
     </div>
 </section>

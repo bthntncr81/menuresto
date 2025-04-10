@@ -16,4 +16,11 @@ export class RegisterService {
     register(payload: any) {
         return this.http.genericPost("User", "RegisterUser", payload);
     }
+    verifyEmail(payload: any) {
+        return this.http.genericPost("User", "VerifieEmail", payload);
+    }
+    paymentDone(payload: any) {
+        return this.http.genericPost("Payment", "PaymentDone", payload);
+
+    }
 }
