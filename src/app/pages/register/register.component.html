@@ -1,178 +1,297 @@
 <!-- register.component.html -->
 <section class="dtr-section dtr-py-100">
-    <div class="container">
-        <!-- Başlık -->
-        <div class="row dtr-mb-50">
-            <div class="col-12 text-center">
-                <h2 class="dtr-mb-5">Paket Satın Al</h2>
-                <p>Seçilen Paket: <strong>{{ packageType }}</strong></p>
-                <div class="dtr-styled-divider divider-center bg-light-green"></div>
-            </div>
-        </div>
-
-        <!-- Aşamalar -->
-        <div class="row dtr-mb-30">
-            <div class="col-12">
-                <ul class="dtr-progressbar">
-                    <li [class.active]="currentStep >= 1">Kayıt Bilgileri</li>
-                    <li [class.active]="currentStep >= 2">Email Doğrulama</li>
-                    <li [class.active]="currentStep >= 3">Ödeme</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Form Alanı -->
-        <div class="row">
-            <div class="col-12 col-md-5 dtr-md-mb-30 d-flex align-items-center">
-                <!-- Paket 1 starts -->
-                <div *ngIf="+packageType === 1 || +packageType === 2" class="dtr-pricing bg-light-green ">
-                    <div class="dtr-pricing-img"><img src="assets/images/ptable-icon1.png" alt="image"></div>
-                    <h3>Starter Paket</h3>
-
-                    <!-- Toggle switch for yearly/monthly -->
-                    <div class="d-flex justify-content-center mb-3">
-                        <div class="btn-group btn-group-toggle">
-                            <label class="btn btn-sm btn-outline-green" [class.active]="+packageType === 1">
-                                <input type="radio" name="package1" [(ngModel)]="packageType" [value]="1"> Yıllık
-                            </label>
-                            <label class=" btn btn-sm btn-outline-green" [class.active]="+packageType === 2">
-                                <input type="radio" name="package1" [(ngModel)]="packageType" [value]="2"> Aylık
-                            </label>
-                        </div>
-                    </div>
-
-                    <p class=" dtr-price color-green"><sup>₺</sup>{{ +packageType === 1 ? '7490' : '1249' }}</p>
-                    <p class="dtr-m-0">den başlayan fiyatlarla*</p>
-                    <p class="text-size-md font-weight-600 color-green">Temel Özellikler</p>
-                    <ul class="dtr-list-block">
-                        <li>Dijital Menü</li>
-                        <li>Online Magaza</li>
-                        <li>Yönetim Yazılımı</li>
-                    </ul>
-                </div>
-
-                <div *ngIf="+packageType === 3 || +packageType === 4" class="dtr-pricing pricing-focused bg-dark-blue">
-                    <div class="dtr-pricing-tagline-wrapper">
-                        <div class="dtr-pricing-tagline color-green">En Popüler</div>
-                    </div>
-                    <div class="dtr-pricing-img"><img src="assets/images/ptable-icon2.png" alt="image"></div>
-                    <h3 class="color-white">Professional Paket</h3>
-
-                    <!-- Toggle switch for yearly/monthly -->
-                    <div class="d-flex justify-content-center mb-3">
-                        <div class="btn-group btn-group-toggle">
-                            <label class="btn btn-sm btn-outline-white" [class.active]="+packageType === 3">
-                                <input type="radio" name="package2" [(ngModel)]="packageType" [value]="3"> Yıllık
-                            </label>
-                            <label class=" btn btn-sm btn-outline-white" [class.active]="+packageType === 4">
-                                <input type="radio" name="package2" [(ngModel)]="packageType" [value]="4"> Aylık
-                            </label>
-                        </div>
-                    </div>
-
-                    <p class="dtr-price color-green"><sup>₺</sup>{{ +packageType === 3 ? '9490' : '1590' }}</p>
-                    <p class="dtr-m-0 color-white">den başlayan fiyatlarla*</p>
-                    <a [routerLink]="['/register']" [queryParams]="{packageType: packageType}"
-                        class="dtr-btn btn-white dtr-my-30">Satın Al</a>
-                    <p class="text-size-md font-weight-600 color-green">Ekstra Özellikler</p>
-                    <ul class="dtr-list-block color-white">
-                        <li>Dijital Menü</li>
-                        <li>Online Magaza</li>
-                        <li>Yönetim Yazılımı</li>
-                        <li>Self-Order Ekranı Yazılımı</li>
-                    </ul>
-                </div>
-
-                <div *ngIf="+packageType === 5" class="dtr-pricing bg-light-green">
-                    <div class="dtr-pricing-img"><img src="assets/images/ptable-icon3.png" alt="image"></div>
-                    <h3>Premium Paket</h3>
-
-                    <!-- Only yearly option -->
-                    <div class="d-flex justify-content-center mb-3">
-                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                            <label class="btn btn-sm btn-outline-green active">
-                                <input type="radio" name="package3" checked disabled> Yıllık
-                            </label>
-                        </div>
-                    </div>
-
-                    <p class="dtr-price color-green"><sup>₺</sup>17490</p>
-                    <p class="dtr-m-0">den başlayan fiyatlarla*</p>
-                    <p class="text-size-md font-weight-600 color-green">Tüm Özellikler</p>
-                    <ul class="dtr-list-block">
-                        <li>Dijital Menü</li>
-                        <li>Online Magaza</li>
-                        <li>Yönetim Yazılımı</li>
-                        <li>Self-Order Ekranı Yazılımı</li>
-                        <li>Admin Panelli Tanıtım Web Sitesi</li>
-                        <li>Alan Adı Danışmanlığı</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="col-12 col-md-7">
-                <div class="dtr-form dtr-form-has-icon">
-                    <!-- Adım 1: Kayıt Formu -->
-                    <form *ngIf="currentStep === 1" (ngSubmit)="onSubmit()">
-                        <fieldset class="dtr-py-100">
-                            <p class="dtr-input">
-                                <i class="icon-user color-dark-blue"></i>
-                                <input type="text" [(ngModel)]="formData.name" name="name" placeholder="Adınız"
-                                    required>
-                            </p>
-                            <p class="dtr-input">
-                                <i class="icon-user-edit color-dark-blue"></i>
-                                <input type="text" [(ngModel)]="formData.surname" name="surname" placeholder="Soyadınız"
-                                    required>
-                            </p>
-                            <p class="dtr-input">
-                                <i class="icon-envelope color-dark-blue"></i>
-                                <input type="email" [(ngModel)]="formData.email" name="email" placeholder="*Email"
-                                    required>
-                            </p>
-                            <p class="dtr-input">
-                                <i class="icon-phone color-dark-blue"></i>
-                                <input type="tel" [(ngModel)]="formData.phone" name="phone" placeholder="Telefon"
-                                    required>
-                            </p>
-                            <div *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
-                            <p class="dtr-m-0 text-center">
-                                * İşlemlerinize devam edebilmek için. Mail adresinize doğrulama mesajı gönderilecektir.
-                            </p>
-                            <p class="dtr-m-0 text-center">
-                                <button class="dtr-btn btn-dark-blue" type="submit">Kayıt Ol</button>
-                                <button class="dtr-btn btn-light-blue" type="button" (click)="goBackToPlans()">Paket
-                                    Seçimine Geri Dön</button>
-                            </p>
-                        </fieldset>
-                    </form>
-
-                    <!-- Adım 2: Doğrulama Kodu -->
-                    <div *ngIf="currentStep === 2" class="dtr-py-100 text-center">
-                        <h3 class="dtr-mb-20">Email Doğrulama</h3>
-                        <p>{{formData.email}} adresine gönderilen doğrulama kodunu giriniz.</p>
-
-                        <div class="dtr-input dtr-mb-20">
-                            <i class="icon-lock color-dark-blue"></i>
-                            <input type="text" [(ngModel)]="verificationCode" placeholder="Doğrulama Kodu">
-                        </div>
-
-                        <div *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
-                        <div *ngIf="message" class="alert alert-success">{{message}}</div>
-
-                        <button class="dtr-btn btn-dark-blue dtr-mr-10" (click)="verifyCode()">Doğrula</button>
-                        <button class="dtr-btn btn-light-blue" (click)="currentStep = 1">Geri Dön</button>
-                    </div>
-
-                    <!-- Adım 3: Ödeme Bilgileri -->
-                    <div *ngIf="currentStep === 3" class="dtr-py-100 text-center">
-                        <h3 class="dtr-mb-20">Ödeme İşlemleri</h3>
-                        <p>Email doğrulama başarılı! Ödeme işlemine devam edebilirsiniz.</p>
-
-                        <button class="dtr-btn btn-dark-blue" (click)="proceedToPayment()">Ödemeye Devam Et</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="container">
+    <!-- Başlık -->
+    <div class="row dtr-mb-50">
+      <div class="col-12 text-center">
+        <h2 class="dtr-mb-5">Paket Satın Al</h2>
+        <p>
+          Seçilen Paket: <strong>{{ packageType }}</strong>
+        </p>
+        <div class="dtr-styled-divider divider-center bg-light-green"></div>
+      </div>
     </div>
+
+    <!-- Aşamalar -->
+    <div class="row dtr-mb-30">
+      <div class="col-12">
+        <ul class="dtr-progressbar">
+          <li [class.active]="currentStep >= 1">Kayıt Bilgileri</li>
+          <li [class.active]="currentStep >= 2">Email Doğrulama</li>
+          <li [class.active]="currentStep >= 3">Ödeme</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Form Alanı -->
+    <div class="row">
+      <div class="col-12 col-md-5 dtr-md-mb-30 d-flex align-items-center">
+        <!-- Paket 1 starts -->
+        <div
+          *ngIf="+packageType === 1 || +packageType === 2"
+          class="dtr-pricing bg-light-green"
+        >
+          <div class="dtr-pricing-img">
+            <img src="assets/images/ptable-icon1.png" alt="image" />
+          </div>
+          <h3>Starter Paket</h3>
+
+          <!-- Toggle switch for yearly/monthly -->
+          <div class="d-flex justify-content-center mb-3">
+            <div class="btn-group btn-group-toggle">
+              <label
+                class="btn btn-sm btn-outline-green"
+                [class.active]="+packageType === 1"
+              >
+                <input
+                  type="radio"
+                  name="package1"
+                  [(ngModel)]="packageType"
+                  [value]="1"
+                />
+                Yıllık
+              </label>
+              <label
+                class="btn btn-sm btn-outline-green"
+                [class.active]="+packageType === 2"
+              >
+                <input
+                  type="radio"
+                  name="package1"
+                  [(ngModel)]="packageType"
+                  [value]="2"
+                />
+                Aylık
+              </label>
+            </div>
+          </div>
+          <div class="dtr-price color-green">
+            <div style="font-size: 14px; height: 40px">Haziran Ayına Kadar</div>
+            <div *ngIf="+packageType == 1" class="d-flex flex-column">
+              <span style="font-size: 28px; height: 40px">
+                <sup style="font-size: 24px">₺</sup><del>7490</del></span
+              >
+              <span> <sup>₺</sup>4490</span>
+            </div>
+            <div *ngIf="+packageType != 1" class="d-flex flex-column">
+              <span style="font-size: 28px; height: 40px">
+                <sup style="font-size: 24px">₺</sup><del>1290</del></span
+              >
+              <span> <sup>₺</sup>849</span>
+            </div>
+          </div>
+          <p class="text-size-md font-weight-600 color-green">
+            Temel Özellikler
+          </p>
+          <ul class="dtr-list-block">
+            <li>Dijital Menü</li>
+            <li>Online Magaza</li>
+            <li>Yönetim Yazılımı</li>
+          </ul>
+        </div>
+
+        <div
+          *ngIf="+packageType === 3 || +packageType === 4"
+          class="dtr-pricing pricing-focused bg-dark-blue"
+        >
+          <div class="dtr-pricing-tagline-wrapper">
+            <div class="dtr-pricing-tagline color-green">En Popüler</div>
+          </div>
+          <div class="dtr-pricing-img">
+            <img src="assets/images/ptable-icon2.png" alt="image" />
+          </div>
+          <h3 class="color-white">Professional Paket</h3>
+
+          <!-- Toggle switch for yearly/monthly -->
+          <div class="d-flex justify-content-center mb-3">
+            <div class="btn-group btn-group-toggle">
+              <label
+                class="btn btn-sm btn-outline-white"
+                [class.active]="+packageType === 3"
+              >
+                <input
+                  type="radio"
+                  name="package2"
+                  [(ngModel)]="packageType"
+                  [value]="3"
+                />
+                Yıllık
+              </label>
+              <label
+                class="btn btn-sm btn-outline-white"
+                [class.active]="+packageType === 4"
+              >
+                <input
+                  type="radio"
+                  name="package2"
+                  [(ngModel)]="packageType"
+                  [value]="4"
+                />
+                Aylık
+              </label>
+            </div>
+          </div>
+
+          <p class="dtr-price color-green">
+            <sup>₺</sup>{{ +packageType === 3 ? "9490" : "1590" }}
+          </p>
+          <p class="dtr-m-0 color-white">den başlayan fiyatlarla*</p>
+          <a
+            [routerLink]="['/register']"
+            [queryParams]="{ packageType: packageType }"
+            class="dtr-btn btn-white dtr-my-30"
+            >Satın Al</a
+          >
+          <p class="text-size-md font-weight-600 color-green">
+            Ekstra Özellikler
+          </p>
+          <ul class="dtr-list-block color-white">
+            <li>Dijital Menü</li>
+            <li>Online Magaza</li>
+            <li>Yönetim Yazılımı</li>
+            <li>Self-Order Ekranı Yazılımı</li>
+          </ul>
+        </div>
+
+        <div *ngIf="+packageType === 5" class="dtr-pricing bg-light-green">
+          <div class="dtr-pricing-img">
+            <img src="assets/images/ptable-icon3.png" alt="image" />
+          </div>
+          <h3>Premium Paket</h3>
+
+          <!-- Only yearly option -->
+          <div class="d-flex justify-content-center mb-3">
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-sm btn-outline-green active">
+                <input type="radio" name="package3" checked disabled /> Yıllık
+              </label>
+            </div>
+          </div>
+
+          <p class="dtr-price color-green"><sup>₺</sup>17490</p>
+          <p class="dtr-m-0">den başlayan fiyatlarla*</p>
+          <p class="text-size-md font-weight-600 color-green">Tüm Özellikler</p>
+          <ul class="dtr-list-block">
+            <li>Dijital Menü</li>
+            <li>Online Magaza</li>
+            <li>Yönetim Yazılımı</li>
+            <li>Self-Order Ekranı Yazılımı</li>
+            <li>Admin Panelli Tanıtım Web Sitesi</li>
+            <li>Alan Adı Danışmanlığı</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-7">
+        <div class="dtr-form dtr-form-has-icon">
+          <!-- Adım 1: Kayıt Formu -->
+          <form *ngIf="currentStep === 1" (ngSubmit)="onSubmit()">
+            <fieldset class="dtr-py-100">
+              <p class="dtr-input">
+                <i class="icon-user color-dark-blue"></i>
+                <input
+                  type="text"
+                  [(ngModel)]="formData.name"
+                  name="name"
+                  placeholder="Adınız"
+                  required
+                />
+              </p>
+              <p class="dtr-input">
+                <i class="icon-user-edit color-dark-blue"></i>
+                <input
+                  type="text"
+                  [(ngModel)]="formData.surname"
+                  name="surname"
+                  placeholder="Soyadınız"
+                  required
+                />
+              </p>
+              <p class="dtr-input">
+                <i class="icon-envelope color-dark-blue"></i>
+                <input
+                  type="email"
+                  [(ngModel)]="formData.email"
+                  name="email"
+                  placeholder="*Email"
+                  required
+                />
+              </p>
+              <p class="dtr-input">
+                <i class="icon-phone color-dark-blue"></i>
+                <input
+                  type="tel"
+                  [(ngModel)]="formData.phone"
+                  name="phone"
+                  placeholder="Telefon"
+                  required
+                />
+              </p>
+              <div *ngIf="errorMessage" class="alert alert-danger">
+                {{ errorMessage }}
+              </div>
+              <p class="dtr-m-0 text-center">
+                * İşlemlerinize devam edebilmek için. Mail adresinize doğrulama
+                mesajı gönderilecektir.
+              </p>
+              <p class="dtr-m-0 text-center">
+                <button class="dtr-btn btn-dark-blue" type="submit">
+                  Kayıt Ol
+                </button>
+                <button
+                  class="dtr-btn btn-light-blue"
+                  type="button"
+                  (click)="goBackToPlans()"
+                >
+                  Paket Seçimine Geri Dön
+                </button>
+              </p>
+            </fieldset>
+          </form>
+
+          <!-- Adım 2: Doğrulama Kodu -->
+          <div *ngIf="currentStep === 2" class="dtr-py-100 text-center">
+            <h3 class="dtr-mb-20">Email Doğrulama</h3>
+            <p>
+              {{ formData.email }} adresine gönderilen doğrulama kodunu giriniz.
+            </p>
+
+            <div class="dtr-input dtr-mb-20">
+              <i class="icon-lock color-dark-blue"></i>
+              <input
+                type="text"
+                [(ngModel)]="verificationCode"
+                placeholder="Doğrulama Kodu"
+              />
+            </div>
+
+            <div *ngIf="errorMessage" class="alert alert-danger">
+              {{ errorMessage }}
+            </div>
+            <div *ngIf="message" class="alert alert-success">{{ message }}</div>
+
+            <button
+              class="dtr-btn btn-dark-blue dtr-mr-10"
+              (click)="verifyCode()"
+            >
+              Doğrula
+            </button>
+            <button class="dtr-btn btn-light-blue" (click)="currentStep = 1">
+              Geri Dön
+            </button>
+          </div>
+
+          <!-- Adım 3: Ödeme Bilgileri -->
+          <div *ngIf="currentStep === 3" class="dtr-py-100 text-center">
+            <h3 class="dtr-mb-20">Ödeme İşlemleri</h3>
+            <p>Email doğrulama başarılı! Ödeme işlemine devam edebilirsiniz.</p>
+
+            <button class="dtr-btn btn-dark-blue" (click)="proceedToPayment()">
+              Ödemeye Devam Et
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
