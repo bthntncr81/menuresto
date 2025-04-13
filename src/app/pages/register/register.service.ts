@@ -16,6 +16,9 @@ export class RegisterService {
     register(payload: any) {
         return this.http.genericPost("User", "RegisterUser", payload);
     }
+    ReSendVerificationCode(payload: any) {
+        return this.http.genericPost("User", "ReSendVerificationCode", payload);
+    }
     verifyEmail(payload: any) {
         return this.http.genericPost("User", "VerifieEmail", payload);
     }
