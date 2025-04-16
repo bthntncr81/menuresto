@@ -36,11 +36,11 @@
           <!-- Toggle switch for yearly/monthly -->
           <div class="d-flex justify-content-center mb-3">
             <div class="btn-group btn-group-toggle">
-              <label class="btn btn-sm btn-outline-green" [class.active]="+packageType === 1">
+              <label class="btn btn-sm btn-outline-green " style="z-index: 0;" [class.active]="+packageType === 1">
                 <input type="radio" name="package1" [(ngModel)]="packageType" [value]="1" />
                 Yıllık
               </label>
-              <label class="btn btn-sm btn-outline-green" [class.active]="+packageType === 2">
+              <label class="btn btn-sm btn-outline-green" style="z-index: 0;" [class.active]="+packageType === 2">
                 <input type="radio" name="package1" [(ngModel)]="packageType" [value]="2" />
                 Aylık
               </label>
@@ -71,7 +71,7 @@
 
         <div *ngIf="+packageType === 3 || +packageType === 4" class="dtr-pricing pricing-focused bg-dark-blue">
           <div class="dtr-pricing-tagline-wrapper">
-            <div class="dtr-pricing-tagline color-green">En Popüler</div>
+            <div class="dtr-pricing-tagline color-green " style="z-index: 0;">En Popüler</div>
           </div>
           <div class="dtr-pricing-img">
             <img src="assets/images/ptable-icon2.png" alt="image" />
@@ -81,11 +81,11 @@
           <!-- Toggle switch for yearly/monthly -->
           <div class="d-flex justify-content-center mb-3">
             <div class="btn-group btn-group-toggle">
-              <label class="btn btn-sm btn-outline-white" [class.active]="+packageType === 3">
+              <label class="btn btn-sm btn-outline-white" style="z-index: 0;" [class.active]="+packageType === 3">
                 <input type="radio" name="package2" [(ngModel)]="packageType" [value]="3" />
                 Yıllık
               </label>
-              <label class="btn btn-sm btn-outline-white" [class.active]="+packageType === 4">
+              <label class="btn btn-sm btn-outline-white" style="z-index: 0;" [class.active]="+packageType === 4">
                 <input type="radio" name="package2" [(ngModel)]="packageType" [value]="4" />
                 Aylık
               </label>
@@ -118,7 +118,7 @@
           <!-- Only yearly option -->
           <div class="d-flex justify-content-center mb-3">
             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-              <label class="btn btn-sm btn-outline-green active">
+              <label class="btn btn-sm btn-outline-green active " style="z-index: 0;">
                 <input type="radio" name="package3" checked disabled /> Yıllık
               </label>
             </div>
@@ -164,6 +164,12 @@
                 <input type="text" [(ngModel)]="formData.businessName" name="businessName" placeholder="İşletme adı"
                   required />
               </p>
+              <p class="dtr-m-0 text-center">Kayıt olarak <a class="dtr-styled-link color-green"
+                  (click)="openTermsModal($event)">
+                  <p class="color-green">hizmet
+                    şartlarımızı</p>
+                </a> kabul etmiş sayılırsınız.</p>
+              <app-terms-modal *ngIf="showTermsModal" (closeModal)="showTermsModal = false"></app-terms-modal>
               <div *ngIf="errorMessage" class="alert alert-danger">
                 {{ errorMessage }}
               </div>

@@ -3,3 +3,64 @@
 a {
   text-decoration: none;
 }
+
+.modal-overlay-1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  /* Siyah overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.modal-content-1 {
+  background: white;
+  /* Saf beyaz arkaplan */
+  padding: 30px;
+  border-radius: 8px;
+  max-width: 800px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  color: black;
+  /* Saf siyah yazı */
+  font-family: Arial, sans-serif;
+  /* Okunaklı font */
+  z-index: 3;
+
+  h2 {
+    color: black;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  p,
+  li {
+    color: black;
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: black;
+  font-weight: bold;
+
+  &:hover {
+    color: #555;
+  }
+}

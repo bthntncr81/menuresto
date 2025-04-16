@@ -59,6 +59,7 @@
   color: white;
   border-color: #28a745;
 }
+
 // @keyframes pulse-shadow-scale {
 //   0% {
 //     box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.75);
@@ -83,9 +84,11 @@
   0% {
     transform: translateY(0) scale(1);
   }
+
   50% {
     transform: translateY(-6px);
   }
+
   100% {
     transform: translateY(0) scale(1);
   }
@@ -101,4 +104,31 @@
   border-radius: 12px;
 
   box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.75);
+}
+
+.gif-container {
+  max-width: 500px;
+  width: 100%;
+  aspect-ratio: 600/290;
+  /* Son hedef oran (örneğin 500x260) */
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.75);
+  position: relative;
+}
+
+.gif-container img {
+  width: 100%;
+  height: auto;
+  /* Orijinal yüksekliği koru */
+  object-fit: cover;
+  /* Hem üstten hem alttan kırpma için: */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* Kırpma miktarını ayarlayın: */
+  min-height: calc(100% + 40px);
+  /* 20px üst + 20px alt ekstra alan */
+  min-width: 100%;
 }

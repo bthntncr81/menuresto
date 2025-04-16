@@ -1,18 +1,10 @@
-<footer
-  id="dtr-footer"
-  class="dtr-section-with-bg"
-  style="background-image: url(assets/images/footer-bg.png)"
->
+<footer id="dtr-footer" class="dtr-section-with-bg" style="background-image: url(assets/images/footer-bg.png)">
   <div class="container">
     <div class="row">
       <!-- column 1 starts -->
       <div class="col-12 col-sm-6 col-lg-4 dtr-mb-30">
-        <a href="index.html" class="d-block dtr-mb-15"
-          ><img
-            style="width: 100px"
-            src="assets/images/logo-dark.png"
-            alt="logo"
-        /></a>
+        <a href="index.html" class="d-block dtr-mb-15"><img style="width: 100px" src="assets/images/logo-dark.png"
+            alt="logo" /></a>
         <p>
           Restoranınızı dijital dünyaya taşımak için geliştirdiğimiz Posfixmenu,
           kolay kullanımı ve güçlü özellikleri ile işletmenizi bir adım öne
@@ -23,29 +15,39 @@
       <!-- column 1 ends -->
 
       <!-- column 2 starts -->
-      <div class="col-12 col-sm-6 col-lg-4 text-center dtr-mb-30">
+      <div class="col-12 col-sm-6 col-lg-2 text-center dtr-mb-30">
         <h4 class="color-green">Şirket</h4>
         <ul class="dtr-list-simple">
-          <li><a href="#" class="dtr-styled-link">Özellikler</a></li>
-          <li><a href="#" class="dtr-styled-link">Planlar</a></li>
+          <li><a href="#features" class="dtr-styled-link">Özellikler</a></li>
+          <li><a href="#plans" class="dtr-styled-link">Planlar</a></li>
           <!-- <li><a href="#" class="dtr-styled-link">Blog</a></li> -->
-          <li><a href="#" class="dtr-styled-link">İletişim</a></li>
+          <li><a href="#contact" class="dtr-styled-link">İletişim</a></li>
         </ul>
       </div>
       <!-- column 2 ends -->
 
       <!-- column 3 starts -->
-      <div class="col-12 col-sm-6 col-lg-4 text-center dtr-mb-30">
+      <div class="col-12 col-sm-6 col-lg-2 text-center dtr-mb-30">
         <h4 class="color-green">Destek</h4>
         <ul class="dtr-list-simple">
           <li><a href="#" class="dtr-styled-link">Yardım</a></li>
-          <li><a href="#" class="dtr-styled-link">Gizlilik Politikası</a></li>
-          <li><a href="#" class="dtr-styled-link">Hizmet Şartları</a></li>
+          <li><a href="#" class="dtr-styled-link" (click)="openPrivacyModal($event)">Gizlilik Politikası</a></li>
+          <li><a href="#" class="dtr-styled-link" (click)="openTermsModal($event)">Hizmet Şartları</a></li>
         </ul>
       </div>
       <!-- column 3 ends -->
+      <app-privacy-policy-modal *ngIf="showPrivacyModal"
+        (closeModal)="showPrivacyModal = false"></app-privacy-policy-modal>
+      <app-terms-modal *ngIf="showTermsModal" (closeModal)="showTermsModal = false"></app-terms-modal>
 
       <!-- column 4 starts -->
+      <div class="col-12 col-sm-6 col-lg-4 text-center dtr-mb-30">
+        <h4 class="color-green">İletişim</h4>
+        <ul class="dtr-list-simple">
+          <li><a class="dtr-styled-link">info&#64;posfixmenu.com</a></li>
+          <li><a class="dtr-styled-link">+90 850 840 43 68</a></li>
+        </ul>
+      </div>
       <!-- <div class="col-12 col-sm-6 col-lg-4 dtr-mb-30">
         <h4 class="color-green">Abone Ol</h4>
         <div class="dtr-form dtr-form-has-icon dtr-form-no-gap">

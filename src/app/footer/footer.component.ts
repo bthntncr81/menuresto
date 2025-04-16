@@ -6,5 +6,16 @@ import { Component } from '@angular/core';
   styleUrl: './footer.component.scss'
 })
 export class FooterComponent {
+  showPrivacyModal = false;
+  showTermsModal = false;
 
+  openPrivacyModal(event: Event) {
+    event.preventDefault();
+    this.showPrivacyModal = true;
+  }
+
+  openTermsModal(event: Event) {
+    event.preventDefault();
+    this.showTermsModal = true;
+  }
 }

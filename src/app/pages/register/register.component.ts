@@ -26,6 +26,7 @@ export class RegisterComponent implements OnInit {
   message: string = '';
   errorMessage: string = '';
   language = 'tr';
+  showTermsModal = false;
 
   constructor(private route: ActivatedRoute, private router: Router, private registerService: RegisterService) { }
 
@@ -40,7 +41,10 @@ export class RegisterComponent implements OnInit {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   }
-
+  openTermsModal(event: Event) {
+    event.preventDefault();
+    this.showTermsModal = true;
+  }
   onSubmit() {
     if (!this.formData.name || !this.formData.surname || !this.formData.email || !this.formData.phone || !this.formData.businessName) {
       this.errorMessage = this.language === 'en' ? 'Please fill out all required fields.' : 'Lütfen tüm alanları doldurunuz.';
