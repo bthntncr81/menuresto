@@ -1,45 +1,64 @@
 <!-- Header 
 ============================================= -->
 <header *ngIf="showHeader" id="dtr-header-global" class="fixed-top">
-    <div class="container">
-        <div class="d-flex align-items-center justify-content-between">
+  <div class="container">
+    <div class="d-flex align-items-center justify-content-between">
+      <!-- header left starts -->
+      <div class="dtr-header-left">
+        <!-- logo -->
+        <a class="logo-default dtr-scroll-link" href="#home"
+          ><img
+            src="assets/images/logo-dark.png"
+            style="max-height: 100px"
+            alt="logo"
+        /></a>
 
-            <!-- header left starts -->
-            <div class="dtr-header-left">
+        <!-- logo on scroll -->
+        <a class="logo-alt dtr-scroll-link" href="#home"
+          ><img
+            src="assets/images/logo.png"
+            style="max-height: 100px"
+            alt="logo"
+        /></a>
+        <!-- logo on scroll ends -->
+      </div>
+      <!-- header left ends -->
 
-                <!-- logo -->
-                <a class="logo-default dtr-scroll-link" href="#home"><img src="assets/images/logo-dark.png"
-                        style="max-height: 100px;" alt="logo"></a>
+      <!-- menu starts-->
+      <div class="main-navigation navbar navbar-expand-lg ml-auto">
+        <ul
+          class="dtr-scrollspy navbar-nav dtr-nav light-nav-on-load dark-nav-on-scroll"
+        >
+          <li class="nav-item">
+            <a class="nav-link active" href="#home">Ana Sayfa</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#features">Özellikler</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#plans">Planlar</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="#faq">SSS</a></li>
+          <!-- <li class="nav-item"> <a class="nav-link" href="#blog">Blog</a> </li> -->
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">İletişim</a>
+          </li>
+        </ul>
+      </div>
+      <!-- menu ends-->
 
-                <!-- logo on scroll -->
-                <a class="logo-alt dtr-scroll-link" href="#home"><img src="assets/images/logo.png"
-                        style="max-height: 100px;" alt="logo"></a>
-                <!-- logo on scroll ends -->
-
-            </div>
-            <!-- header left ends -->
-
-            <!-- menu starts-->
-            <div class="main-navigation navbar navbar-expand-lg ml-auto">
-                <ul class="dtr-scrollspy navbar-nav dtr-nav light-nav-on-load dark-nav-on-scroll">
-                    <li class="nav-item"> <a class="nav-link active" href="#home">Ana Sayfa</a> </li>
-                    <li class="nav-item"> <a class="nav-link" href="#features">Özellikler</a> </li>
-                    <li class="nav-item"> <a class="nav-link" href="#plans">Planlar</a> </li>
-                    <li class="nav-item"> <a class="nav-link" href="#faq">SSS</a> </li>
-                    <!-- <li class="nav-item"> <a class="nav-link" href="#blog">Blog</a> </li> -->
-                    <li class="nav-item"> <a class="nav-link" href="#contact">İletişim</a> </li>
-
-                </ul>
-            </div>
-            <!-- menu ends-->
-
-            <!-- header right starts -->
-            <div class="dtr-header-right"> <a href="#letstry"
-                    class="dtr-btn btn-white btn-accent-on-scroll dtr-scroll-link dtr-px-50">Hemen Başlayın</a> </div>
-            <!-- header right ends -->
-
-        </div>
+      <!-- header right starts -->
+      <div class="dtr-header-right">
+        <a
+          [routerLink]="['/register']"
+          [queryParams]="{ packageType: 6 }"
+          class="dtr-btn btn-white btn-accent-on-scroll dtr-scroll-link dtr-px-50"
+          >Ücretsiz Deneyin</a
+        >
+      </div>
+      <!-- header right ends -->
     </div>
+  </div>
 </header>
 <!-- header ends
 ================================================== -->

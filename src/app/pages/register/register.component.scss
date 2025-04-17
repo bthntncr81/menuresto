@@ -1,125 +1,125 @@
 .btn-outline-green.active {
-    background-color: #28a745;
-    color: white;
-    border-color: #28a745;
+  background-color: #28a745;
+  color: white;
+  border-color: #28a745;
 }
 
 .btn-outline-white {
-    color: white;
+  color: white;
 }
 
 .btn-outline-white.active {
-    background-color: #28a745;
-    color: white;
-    border-color: #28a745;
+  background-color: #28a745;
+  color: white;
+  border-color: #28a745;
 }
 
 .dtr-form {
-    display: flex;
-    justify-content: center;
-    /* Yatayda ortalama */
-    align-items: center;
-    /* Dikeyde ortalama */
-    height: 100%;
-    /* Yüksekliği yüzde olarak ayarlayarak, alt elemanları ortalayabilirsiniz */
+  display: flex;
+  justify-content: center;
+  /* Yatayda ortalama */
+  align-items: center;
+  /* Dikeyde ortalama */
+  height: 100%;
+  /* Yüksekliği yüzde olarak ayarlayarak, alt elemanları ortalayabilirsiniz */
 }
 
 .dtr-form fieldset {
-    width: 100%;
-    /* Form alanını genişletir */
-    max-width: 500px;
-    /* İstenilen maksimum genişlik */
-    margin: 0 auto;
-    /* Ortalamayı sağlar */
-    padding: 20px;
-    box-sizing: border-box;
+  width: 100%;
+  /* Form alanını genişletir */
+  max-width: 500px;
+  /* İstenilen maksimum genişlik */
+  margin: 0 auto;
+  /* Ortalamayı sağlar */
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .dtr-input {
-    margin-bottom: 45px;
+  margin-bottom: 45px;
 }
 
 .dtr-btn {
-    width: 100%;
-    margin-top: 20px;
+  width: 100%;
+  margin-top: 20px;
 }
 
 .dtr-btn.btn-dark-blue,
 .dtr-btn.btn-light-blue {
-    width: 100%;
-    margin: 5px 0;
+  width: 100%;
+  margin: 5px 0;
 }
 
 /* register.component.scss */
 .dtr-progressbar {
-    display: flex;
-    justify-content: space-between;
-    list-style: none;
-    padding: 0;
-    margin: 0 0 30px;
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 30px;
+  position: relative;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #ddd;
+    z-index: 1;
+  }
+
+  li {
+    text-align: center;
     position: relative;
+    z-index: 2;
+    color: #999;
+    padding-top: 25px;
 
     &:before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: #ddd;
-        z-index: 1;
+      content: "";
+      display: block;
+      width: 20px;
+      height: 20px;
+      background: #ddd;
+      border-radius: 50%;
+      margin: 8px auto 0px;
     }
 
-    li {
-        text-align: center;
-        position: relative;
-        z-index: 2;
-        color: #999;
-        padding-top: 25px;
+    &.active {
+      color: #2ecc71;
 
-        &:before {
-            content: '';
-            display: block;
-            width: 20px;
-            height: 20px;
-            background: #ddd;
-            border-radius: 50%;
-            margin: 0 auto 10px;
-        }
-
-        &.active {
-            color: #2ecc71;
-
-            &:before {
-                background: #2ecc71;
-            }
-        }
+      &:before {
+        background: #2ecc71;
+      }
     }
+  }
 }
 
 .alert {
-    padding: 10px 15px;
-    margin-bottom: 20px;
-    border-radius: 4px;
+  padding: 10px 15px;
+  margin-bottom: 20px;
+  border-radius: 4px;
 
-    &.alert-danger {
-        background: #ffebee;
-        color: #c62828;
-    }
+  &.alert-danger {
+    background: #ffebee;
+    color: #c62828;
+  }
 
-    &.alert-success {
-        background: #e8f5e9;
-        color: #2e7d32;
-    }
+  &.alert-success {
+    background: #e8f5e9;
+    color: #2e7d32;
+  }
 }
 
 .animate-spin {
-    display: inline-block;
-    animation: spin 1s linear infinite;
+  display: inline-block;
+  animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
-    100% {
-        transform: rotate(360deg);
-    }
+  100% {
+    transform: rotate(360deg);
+  }
 }

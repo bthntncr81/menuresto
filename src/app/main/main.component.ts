@@ -8,6 +8,7 @@ import { Component } from "@angular/core";
 })
 export class MainComponent {
   package1Type: number = 1; // 1: Starter Yıllık, 2: Starter Aylık
+  package3Type: number = 6; // 1: Starter Yıllık, 2: Starter Aylık
   package2Type: number = 3;
   model: SendMail = {
     mail: "",

@@ -4,10 +4,13 @@
     <!-- Başlık -->
     <div class="row dtr-mb-50">
       <div class="col-12 text-center">
-        <h2 class="dtr-mb-5">Paket Satın Al</h2>
-        <p>
+        <h2 *ngIf="+packageType != 6" class="dtr-mb-5">Paket Satın Al</h2>
+        <h2 *ngIf="+packageType == 6" class="dtr-mb-5">
+          Bedava Sisteme Son Bir Adım
+        </h2>
+        <!-- <p *ngIf="+packageType != 6">
           Seçilen Paket: <strong>{{ packageType }}</strong>
-        </p>
+        </p> -->
         <div class="dtr-styled-divider divider-center bg-light-green"></div>
       </div>
     </div>
@@ -18,16 +21,23 @@
         <ul class="dtr-progressbar">
           <li [class.active]="currentStep >= 1">Kayıt Bilgileri</li>
           <li [class.active]="currentStep >= 2">Email Doğrulama</li>
-          <li [class.active]="currentStep >= 3">Ödeme</li>
+          <li *ngIf="+packageType != 6" [class.active]="currentStep >= 3">
+            Ödeme
+          </li>
         </ul>
       </div>
     </div>
 
     <!-- Form Alanı -->
     <div class="row">
-      <div class="col-12 col-md-5 dtr-md-mb-30 d-flex align-items-center justify-content-center">
+      <div
+        class="col-12 col-md-5 dtr-md-mb-30 d-flex align-items-center justify-content-center"
+      >
         <!-- Paket 1 starts -->
-        <div *ngIf="+packageType === 1 || +packageType === 2" class="dtr-pricing bg-light-green">
+        <div
+          *ngIf="+packageType === 1 || +packageType === 2"
+          class="dtr-pricing bg-light-green"
+        >
           <div class="dtr-pricing-img">
             <img src="assets/images/ptable-icon1.png" alt="image" />
           </div>
@@ -36,12 +46,30 @@
           <!-- Toggle switch for yearly/monthly -->
           <div class="d-flex justify-content-center mb-3">
             <div class="btn-group btn-group-toggle">
-              <label class="btn btn-sm btn-outline-green " style="z-index: 0;" [class.active]="+packageType === 1">
-                <input type="radio" name="package1" [(ngModel)]="packageType" [value]="1" />
+              <label
+                class="btn btn-sm btn-outline-green"
+                style="z-index: 0"
+                [class.active]="+packageType === 1"
+              >
+                <input
+                  type="radio"
+                  name="package1"
+                  [(ngModel)]="packageType"
+                  [value]="1"
+                />
                 Yıllık
               </label>
-              <label class="btn btn-sm btn-outline-green" style="z-index: 0;" [class.active]="+packageType === 2">
-                <input type="radio" name="package1" [(ngModel)]="packageType" [value]="2" />
+              <label
+                class="btn btn-sm btn-outline-green"
+                style="z-index: 0"
+                [class.active]="+packageType === 2"
+              >
+                <input
+                  type="radio"
+                  name="package1"
+                  [(ngModel)]="packageType"
+                  [value]="2"
+                />
                 Aylık
               </label>
             </div>
@@ -50,12 +78,14 @@
             <div style="font-size: 14px; height: 40px">Haziran Ayına Kadar</div>
             <div *ngIf="+packageType == 1" class="d-flex flex-column">
               <span style="font-size: 28px; height: 40px">
-                <sup style="font-size: 24px">₺</sup><del>7490</del></span>
+                <sup style="font-size: 24px">₺</sup><del>7490</del></span
+              >
               <span> <sup>₺</sup>4490</span>
             </div>
             <div *ngIf="+packageType != 1" class="d-flex flex-column">
               <span style="font-size: 28px; height: 40px">
-                <sup style="font-size: 24px">₺</sup><del>1290</del></span>
+                <sup style="font-size: 24px">₺</sup><del>1290</del></span
+              >
               <span> <sup>₺</sup>849</span>
             </div>
           </div>
@@ -69,9 +99,14 @@
           </ul>
         </div>
 
-        <div *ngIf="+packageType === 3 || +packageType === 4" class="dtr-pricing pricing-focused bg-dark-blue">
+        <div
+          *ngIf="+packageType === 3 || +packageType === 4"
+          class="dtr-pricing pricing-focused bg-dark-blue"
+        >
           <div class="dtr-pricing-tagline-wrapper">
-            <div class="dtr-pricing-tagline color-green " style="z-index: 0;">En Popüler</div>
+            <div class="dtr-pricing-tagline color-green" style="z-index: 0">
+              En Popüler
+            </div>
           </div>
           <div class="dtr-pricing-img">
             <img src="assets/images/ptable-icon2.png" alt="image" />
@@ -81,12 +116,30 @@
           <!-- Toggle switch for yearly/monthly -->
           <div class="d-flex justify-content-center mb-3">
             <div class="btn-group btn-group-toggle">
-              <label class="btn btn-sm btn-outline-white" style="z-index: 0;" [class.active]="+packageType === 3">
-                <input type="radio" name="package2" [(ngModel)]="packageType" [value]="3" />
+              <label
+                class="btn btn-sm btn-outline-white"
+                style="z-index: 0"
+                [class.active]="+packageType === 3"
+              >
+                <input
+                  type="radio"
+                  name="package2"
+                  [(ngModel)]="packageType"
+                  [value]="3"
+                />
                 Yıllık
               </label>
-              <label class="btn btn-sm btn-outline-white" style="z-index: 0;" [class.active]="+packageType === 4">
-                <input type="radio" name="package2" [(ngModel)]="packageType" [value]="4" />
+              <label
+                class="btn btn-sm btn-outline-white"
+                style="z-index: 0"
+                [class.active]="+packageType === 4"
+              >
+                <input
+                  type="radio"
+                  name="package2"
+                  [(ngModel)]="packageType"
+                  [value]="4"
+                />
                 Aylık
               </label>
             </div>
@@ -96,8 +149,12 @@
             <sup>₺</sup>{{ +packageType === 3 ? "9490" : "1590" }}
           </p>
           <p class="dtr-m-0 color-white">den başlayan fiyatlarla*</p>
-          <a [routerLink]="['/register']" [queryParams]="{ packageType: packageType }"
-            class="dtr-btn btn-white dtr-my-30">Satın Al</a>
+          <a
+            [routerLink]="['/register']"
+            [queryParams]="{ packageType: packageType }"
+            class="dtr-btn btn-white dtr-my-30"
+            >Satın Al</a
+          >
           <p class="text-size-md font-weight-600 color-green">
             Ekstra Özellikler
           </p>
@@ -118,7 +175,10 @@
           <!-- Only yearly option -->
           <div class="d-flex justify-content-center mb-3">
             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-              <label class="btn btn-sm btn-outline-green active " style="z-index: 0;">
+              <label
+                class="btn btn-sm btn-outline-green active"
+                style="z-index: 0"
+              >
                 <input type="radio" name="package3" checked disabled /> Yıllık
               </label>
             </div>
@@ -136,6 +196,33 @@
             <li>Alan Adı Danışmanlığı</li>
           </ul>
         </div>
+
+        <div *ngIf="+packageType === 6" class="dtr-pricing bg-light-green">
+          <div class="dtr-pricing-img">
+            <img src="assets/images/ptable-icon3.png" alt="image" />
+          </div>
+          <h3>Ücretsiz 1 Ay Deneme</h3>
+
+          <!-- Only yearly option -->
+          <div class="d-flex justify-content-center mb-3">
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label
+                class="btn btn-sm btn-outline-green active"
+                style="z-index: 0"
+              >
+                <input type="radio" name="package3" checked disabled /> AYLIK
+              </label>
+            </div>
+          </div>
+          <p class="dtr-price color-green"><sup>₺</sup>0</p>
+          <p class="text-size-md font-weight-600 color-green">Tüm Özellikler</p>
+          <ul class="dtr-list-block">
+            <li>Dijital Menü</li>
+            <li>Online Magaza</li>
+            <li>Yönetim Yazılımı</li>
+            <li>Self-Order Ekranı Yazılımı</li>
+          </ul>
+        </div>
       </div>
 
       <div class="col-12 col-md-7">
@@ -145,31 +232,68 @@
             <fieldset class="dtr-py-100">
               <p class="dtr-input">
                 <i class="icon-user color-dark-blue"></i>
-                <input type="text" [(ngModel)]="formData.name" name="name" placeholder="Adınız" required />
+                <input
+                  type="text"
+                  [(ngModel)]="formData.name"
+                  name="name"
+                  placeholder="Adınız"
+                  required
+                />
               </p>
               <p class="dtr-input">
                 <i class="icon-user-edit color-dark-blue"></i>
-                <input type="text" [(ngModel)]="formData.surname" name="surname" placeholder="Soyadınız" required />
+                <input
+                  type="text"
+                  [(ngModel)]="formData.surname"
+                  name="surname"
+                  placeholder="Soyadınız"
+                  required
+                />
               </p>
               <p class="dtr-input">
                 <i class="icon-envelope color-dark-blue"></i>
-                <input type="email" [(ngModel)]="formData.email" name="email" placeholder="*Email" required />
+                <input
+                  type="email"
+                  [(ngModel)]="formData.email"
+                  name="email"
+                  placeholder="*Email"
+                  required
+                />
               </p>
               <p class="dtr-input">
                 <i class="icon-phone color-dark-blue"></i>
-                <input type="tel" [(ngModel)]="formData.phone" name="phone" placeholder="Telefon" required />
+                <input
+                  type="tel"
+                  [(ngModel)]="formData.phone"
+                  name="phone"
+                  placeholder="Telefon"
+                  required
+                />
               </p>
               <p class="dtr-input">
                 <i class="icon-store color-dark-blue"></i>
-                <input type="text" [(ngModel)]="formData.businessName" name="businessName" placeholder="İşletme adı"
-                  required />
+                <input
+                  type="text"
+                  [(ngModel)]="formData.businessName"
+                  name="businessName"
+                  placeholder="İşletme adı"
+                  required
+                />
               </p>
-              <p class="dtr-m-0 text-center">Kayıt olarak <a class="dtr-styled-link color-green"
-                  (click)="openTermsModal($event)">
-                  <p class="color-green">hizmet
-                    şartlarımızı</p>
-                </a> kabul etmiş sayılırsınız.</p>
-              <app-terms-modal *ngIf="showTermsModal" (closeModal)="showTermsModal = false"></app-terms-modal>
+              <p class="dtr-m-0 text-center">
+                Kayıt olarak
+                <a
+                  class="dtr-styled-link color-green"
+                  (click)="openTermsModal($event)"
+                >
+                  <p class="color-green">hizmet şartlarımızı</p>
+                </a>
+                kabul etmiş sayılırsınız.
+              </p>
+              <app-terms-modal
+                *ngIf="showTermsModal"
+                (closeModal)="showTermsModal = false"
+              ></app-terms-modal>
               <div *ngIf="errorMessage" class="alert alert-danger">
                 {{ errorMessage }}
               </div>
@@ -178,13 +302,21 @@
                 mesajı gönderilecektir.
               </p>
               <p class="dtr-m-0 text-center">
-                <button class="dtr-btn btn-dark-blue" type="submit" [disabled]="loading">
+                <button
+                  class="dtr-btn btn-dark-blue"
+                  type="submit"
+                  [disabled]="loading"
+                >
                   <span *ngIf="!loading">Kayıt Ol</span>
                   <span *ngIf="loading">
                     <i class="icon-spinner animate-spin"></i> Kayıt ediliyor...
                   </span>
                 </button>
-                <button class="dtr-btn btn-light-blue" type="button" (click)="goBackToPlans()">
+                <button
+                  class="dtr-btn btn-light-blue"
+                  type="button"
+                  (click)="goBackToPlans()"
+                >
                   Paket Seçimine Geri Dön
                 </button>
               </p>
@@ -200,20 +332,32 @@
 
             <div class="dtr-input dtr-mb-20">
               <i class="icon-lock color-dark-blue"></i>
-              <input type="text" [(ngModel)]="verificationCode" placeholder="Doğrulama Kodu" />
+              <input
+                type="text"
+                [(ngModel)]="verificationCode"
+                placeholder="Doğrulama Kodu"
+              />
             </div>
 
             <div *ngIf="errorMessage" class="alert alert-danger">
               {{ errorMessage }}
             </div>
             <div *ngIf="message" class="alert alert-success">{{ message }}</div>
-            <button class="dtr-btn btn-dark-blue" (click)="verifyCode()" [disabled]="loadingVerifie">
+            <button
+              class="dtr-btn btn-dark-blue"
+              (click)="verifyCode()"
+              [disabled]="loadingVerifie"
+            >
               <span *ngIf="!loadingVerifie">Doğrula</span>
               <span *ngIf="loadingVerifie">
                 <i class="icon-spinner animate-spin"></i> Doğrulanıyor...
               </span>
             </button>
-            <button class="dtr-btn btn-dark-blue" (click)="reSend()" [disabled]="loadingReSend">
+            <button
+              class="dtr-btn btn-dark-blue"
+              (click)="reSend()"
+              [disabled]="loadingReSend"
+            >
               <span *ngIf="!loadingReSend">Tekrar Doğrulama Kodu Gönder</span>
               <span *ngIf="loadingReSend">
                 <i class="icon-spinner animate-spin"></i> Gönderiliyor...
@@ -225,13 +369,32 @@
           </div>
 
           <!-- Adım 3: Ödeme Bilgileri -->
-          <div *ngIf="currentStep === 3" class="dtr-py-100 text-center">
+          <div
+            *ngIf="currentStep === 3 && +packageType != 6"
+            class="dtr-py-100 text-center"
+          >
             <h3 class="dtr-mb-20">Ödeme İşlemleri</h3>
             <p>Email doğrulama başarılı! Ödeme işlemine devam edebilirsiniz.</p>
 
-            <button class="dtr-btn btn-dark-blue" (click)="proceedToPayment()">
+            <button
+              *ngIf=""
+              class="dtr-btn btn-dark-blue"
+              (click)="proceedToPayment()"
+            >
               Ödemeye Devam Et
             </button>
+          </div>
+
+          <div
+            *ngIf="currentStep === 3 && +packageType == 6"
+            class="dtr-py-100 text-center"
+          >
+            <h3 class="dtr-mb-20">Sisteminiz Oluşturulmaya Başlandı</h3>
+            <p>
+              Sisteminiz hazır olduğunda kayıt oluşturduğunuz mail adresine
+              giriş ve kullanım bilgileri gönderilecektir. Bu işlem 5-60 dakika
+              arası sürebilir.
+            </p>
           </div>
         </div>
       </div>
